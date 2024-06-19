@@ -1,0 +1,27 @@
+{
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "family": "backend",
+    "containerDefinitions": [
+        {
+            "name": "backend",
+            "image": "851725279804.dkr.ecr.us-east-1.amazonaws.com/backend:latest",
+            "essential": true,
+            "cpu": "2048",
+            "memory":"5120",
+            "portMappings": [
+              {
+                "containerPort": 8080,
+                "hostPort"     : 8080
+              }
+            ]
+  
+        }
+    ],
+    "volumes": [],
+    "networkMode": "awsvpc",
+    "memory": "5120",
+    "cpu": "2048",
+    "executionRoleArn": "arn:aws:iam::851725279804:role/ecsTaskExecutionRole"
+  }
