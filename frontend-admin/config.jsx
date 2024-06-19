@@ -1,0 +1,1 @@
+export const homeAPI = 'http://3.236.125.29:8080/api'
