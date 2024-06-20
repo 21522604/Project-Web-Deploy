@@ -46,7 +46,6 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     #Backend deploy  
-
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
