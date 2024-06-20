@@ -28,7 +28,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     environment: production
-    
+
 
     steps:
     - name: Checkout
@@ -89,7 +89,7 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        cd ../frontend-admin
+        cd frontend-admin
         docker build -t $ECR_REGISTRY/$ECR_FRONTENDADMIN_REPOSITORY:$IMAGE_TAG .
         docker tag $ECR_REGISTRY/$ECR_FRONTENDADMIN_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_FRONTENDADMIN_REPOSITORY:latest
         docker push $ECR_REGISTRY/$ECR_FRONTENDADMIN_REPOSITORY:$IMAGE_TAG
@@ -122,7 +122,7 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        cd ../frontend-customer
+        cd frontend-customer
         docker build -t $ECR_REGISTRY/$ECR_FRONTENDCUSTOMER_REPOSITORY:$IMAGE_TAG .
         docker tag $ECR_REGISTRY/$ECR_FRONTENDCUSTOMER_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_FRONTENDCUSTOMER_REPOSITORY:latest
         docker push $ECR_REGISTRY/$ECR_FRONTENDCUSTOMER_REPOSITORY:$IMAGE_TAG
