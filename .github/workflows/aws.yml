@@ -78,7 +78,19 @@ jobs:
         service: ${{ env.ECS_BACKEND_SERVICE }}
         cluster: ${{ env.ECS_CLUSTER }}
         wait-for-service-stability: true
-
+    
+    - name: Change backend IP in frontend
+      id: change-IP-in-fe
+      run: |
+        sudo apt  install jq
+        TASK_ARNS=$(aws ecs list-tasks --cluster $ECS_CLUSTER --service-name $ECS_BACKEND_SERVICE --query 'taskArns' --output text)
+        TASK_ARN=$(echo $TASK_ARNS | awk '{print $1}')
+        TASK_DETAILS=$(aws ecs describe-tasks --cluster $ECS_CLUSTER --tasks $TASK_ARN)
+        ENI_ID=$(echo $TASK_DETAILS | jq -r '.tasks[0].attachments[0].details[] | select(.name == "networkInterfaceId") | .value')
+        ENI_DETAILS=$(aws ec2 describe-network-interfaces --network-interface-ids $ENI_ID)
+        PUBLIC_IP=$(echo $ENI_DETAILS | jq -r '.NetworkInterfaces[0].Association.PublicIp')
+        echo "export const homeAPI = 'http://$PUBLIC_IP:8080/api'" > frontend-admin/config.jsx
+        echo "export const backendAPI = 'http://$PUBLIC_IP:8080'" > frontend-customer/config.jsx
     #Frontend-admin deploy
     - name: Build, tag, and push image to Amazon ECR
       id: build-image-fe-admin
@@ -111,6 +123,19 @@ jobs:
         service: ${{ env.ECS_FRONTENDADMIN_SERVICE }}
         cluster: ${{ env.ECS_CLUSTER }}
         wait-for-service-stability: true
+
+    - name: Change frontend-admin IP in frontend-customer
+      id: change-fe-admin-IP-in-fe-cus
+      run: |
+        sudo apt  install jq
+        TASK_ARNS=$(aws ecs list-tasks --cluster $ECS_CLUSTER --service-name $ECS_FRONTENDADMIN_SERVICE --query 'taskArns' --output text)
+        TASK_ARN=$(echo $TASK_ARNS | awk '{print $1}')
+        TASK_DETAILS=$(aws ecs describe-tasks --cluster $ECS_CLUSTER --tasks $TASK_ARN)
+        ENI_ID=$(echo $TASK_DETAILS | jq -r '.tasks[0].attachments[0].details[] | select(.name == "networkInterfaceId") | .value')
+        ENI_DETAILS=$(aws ec2 describe-network-interfaces --network-interface-ids $ENI_ID)
+        PUBLIC_IP=$(echo $ENI_DETAILS | jq -r '.NetworkInterfaces[0].Association.PublicIp')
+        echo "export const backendAPI = 'http://$PUBLIC_IP:3000'" >> frontend-customer/config.jsx
+   
     
     #Frontend-customer deploy
     - name: Build, tag, and push image to Amazon ECR
