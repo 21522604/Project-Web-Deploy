@@ -85,7 +85,7 @@ let update = async (req, res, next) => {
                 include: { model: Product_Image, attributes: ['image_id', 'path'] }
             });
             if (!productVariant) return res.status(400).send('Product Variant này không tồn tại');
-
+ 
             for (let file of files) {
                 fileName = file.path.slice(-40, file.path.length)
                 let path = `${homeAPI}/static/images/` + fileName
