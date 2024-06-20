@@ -91,6 +91,8 @@ jobs:
         PUBLIC_IP=$(echo $ENI_DETAILS | jq -r '.NetworkInterfaces[0].Association.PublicIp')
         echo "export const homeAPI = 'http://$PUBLIC_IP:8080/api'" > frontend-admin/config.jsx
         echo "export const backendAPI = 'http://$PUBLIC_IP:8080'" > frontend-customer/config.jsx
+        QUERY="use clothes-web-shop; UPDATE Product_Images SET path = CONCAT('http://$PUBLIC_IP:8080', SUBSTRING(path, LOCATE('/static', path))) WHERE path LIKE '%/static%';"
+        mysql -u root -p12345678 -h dbinstance.chkyog0u07rz.us-east-1.rds.amazonaws.com -e "$QUERY"
     #Frontend-admin deploy
     - name: Build, tag, and push image to Amazon ECR
       id: build-image-fe-admin
@@ -107,6 +109,7 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_FRONTENDADMIN_REPOSITORY:$IMAGE_TAG
         docker push $ECR_REGISTRY/$ECR_FRONTENDADMIN_REPOSITORY:latest
         echo "image=$ECR_REGISTRY/$ECR_FRONTENDADMIN_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+        
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def-fe-admin
@@ -134,7 +137,8 @@ jobs:
         ENI_ID=$(echo $TASK_DETAILS | jq -r '.tasks[0].attachments[0].details[] | select(.name == "networkInterfaceId") | .value')
         ENI_DETAILS=$(aws ec2 describe-network-interfaces --network-interface-ids $ENI_ID)
         PUBLIC_IP=$(echo $ENI_DETAILS | jq -r '.NetworkInterfaces[0].Association.PublicIp')
-        echo "export const frontendAPI = 'http://$PUBLIC_IP:3000'" >> frontend-customer/config.jsx   
+        echo "export const frontendAPI = 'http://$PUBLIC_IP:3000'" >> frontend-customer/config.jsx
+
    
     
     #Frontend-customer deploy
