@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import Router from 'next/router'
 import { Empty } from 'antd'
 import axios from 'axios'
-
+import { homeAPI } from '@/config'
 import Header from '@/components/Header';
 import Heading from '@/components/Heading';
 import OrderRow from '@/components/OrderManagementPage/OrderRow';
