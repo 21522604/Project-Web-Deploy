@@ -53,7 +53,7 @@ const ColourManage = () => {
         }
         if (newColour) {
             try {
-                await axios.post(homeAPI + '/colour/create',
+                await axios.post(`${homeAPI}/colour/create`,
                     {
                         colour_name: newColour
                     })

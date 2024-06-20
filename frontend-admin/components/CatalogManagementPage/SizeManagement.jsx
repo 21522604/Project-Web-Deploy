@@ -30,7 +30,7 @@ const SizeManage = () => {
 
     const refreshSizetTable = async () => {
         try {
-            const result = await axios.get(homeAPI + '/size/list')
+            const result = await axios.get(`${homeAPI}/size/list`)
             setSizeList(result.data)
         } catch (err) {
             console.log(err)
@@ -53,7 +53,7 @@ const SizeManage = () => {
         }
         if (newSize) {
             try {
-                await axios.post(homeAPI + '/size/create',
+                await axios.post(`${homeAPI}/size/create`,
                     {
                         size_name: newSize
                     })

@@ -36,7 +36,7 @@ const Category = () => {
 
     const refreshCategoryTable = async () => {
         try {
-            const result = await axios.get(homeAPI + '/category/list')
+            const result = await axios.get(`${homeAPI}/category/list`)
             setCategoryList(result.data)
         } catch (err) {
             console.log(err)
@@ -59,7 +59,7 @@ const Category = () => {
         }
         if (newCategory) {
             try {
-                await axios.post(homeAPI + '/category/create-level1',
+                await axios.post(`${homeAPI}/category/create-level1`,
                     {
                         title: newCategory
                     })

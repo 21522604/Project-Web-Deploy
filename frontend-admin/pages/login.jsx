@@ -42,7 +42,7 @@ const LoginPage = () => {
         }
 
         try {
-            const response = await axios.post(homeAPI + '/admin/login', {
+            const response = await axios.post(`${homeAPI}/admin/login`, {
                 email: email,
                 password: password
             })

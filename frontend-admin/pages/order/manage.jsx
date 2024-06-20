@@ -60,7 +60,7 @@ const OrderManagementPage = () => {
     useEffect(() => {
         const getOrderList = async () => {
             try {
-                const result = await axios.get(homeAPI + '/order/admin/list')
+                const result = await axios.get(`${homeAPI}/order/admin/list`)
                 setOrderList(result.data)
             } catch (err) {
                 console.log(err);
@@ -72,7 +72,7 @@ const OrderManagementPage = () => {
 
     const refreshOrderTable = async () => {
         try {
-            const result = await axios.get(homeAPI + '/order/admin/list')
+            const result = await axios.get(`${homeAPI}/order/admin/list`)
             setOrderList(result.data)
         } catch (err) {
             console.log(err);

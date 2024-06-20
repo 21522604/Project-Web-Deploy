@@ -10,43 +10,43 @@ import { formatTime } from '@/helpers/format';
 import { backendAPI } from '@/config'
 
 const fakeOrderDetail = {
-    "order_id": "71828451735555",
-    "state_id": 4,
-    "state_name": "Đã Giao",
-    "created_at": "2023-03-25T01:43:36.000Z",
-    "order_items": [
-        {
-            "name": "Áo thun thể thao nam Active ProMax",
-            "quantity": 1,
-            "price": 179000,
-            "colour": "Trắng",
-            "size": "XL",
-            "total_value": 179000
-        },
-        {
-            "name": "Áo thun thể thao nam Active ProMax",
-            "quantity": 1,
-            "price": 179000,
-            "colour": "Đen",
-            "size": "M",
-            "total_value": 179000
-        },
-        {
-            "name": "Quần Jeans Clean Denim dáng Regular S3",
-            "quantity": 1,
-            "price": 599000,
-            "colour": "Xanh Nhạt",
-            "size": "30",
-            "total_value": 599000
-        }
-    ],
-    "total_product_value": 957000,
-    "delivery_charges": 20000,
-    "total_order_value": 977000,
-    "customer_name": "Vương Trung Tín",
-    "email": "tin@gmail.com",
-    "phone_number": "0932528331",
-    "address": "51A9 Đường Trần Nam Phú, Phường An Khánh, Quận Ninh Kiều, Thành Phố Cần Thơ"
+    // "order_id": "71828451735555",
+    // "state_id": 4,
+    // "state_name": "Đã Giao",
+    // "created_at": "2023-03-25T01:43:36.000Z",
+    // "order_items": [
+    //     {
+    //         "name": "Áo thun thể thao nam Active ProMax",
+    //         "quantity": 1,
+    //         "price": 179000,
+    //         "colour": "Trắng",
+    //         "size": "XL",
+    //         "total_value": 179000
+    //     },
+    //     {
+    //         "name": "Áo thun thể thao nam Active ProMax",
+    //         "quantity": 1,
+    //         "price": 179000,
+    //         "colour": "Đen",
+    //         "size": "M",
+    //         "total_value": 179000
+    //     },
+    //     {
+    //         "name": "Quần Jeans Clean Denim dáng Regular S3",
+    //         "quantity": 1,
+    //         "price": 599000,
+    //         "colour": "Xanh Nhạt",
+    //         "size": "30",
+    //         "total_value": 599000
+    //     }
+    // ],
+    // "total_product_value": 957000,
+    // "delivery_charges": 20000,
+    // "total_order_value": 977000,
+    // "customer_name": "Vương Trung Tín",
+    // "email": "tin@gmail.com",
+    // "phone_number": "0932528331",
+    // "address": "51A9 Đường Trần Nam Phú, Phường An Khánh, Quận Ninh Kiều, Thành Phố Cần Thơ"
 }
 
 const OrderDetailPage = () => {
@@ -77,7 +77,7 @@ const OrderDetailPage = () => {
     useEffect(() => {
         const getOrderDetail = async () => {
             try {
-                let response = await axios.get(backendAPI + `/api/order/detail/${customerId}/${order_id}`);
+                let response = await axios.get(`${backendAPI}/api/order/detail/${customerId}/${order_id}`);
                 setOrderId(response.data.order_id)
                 setStateName(response.data.state_name)
                 setStateId(response.data.state_id)

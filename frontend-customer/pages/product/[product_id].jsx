@@ -54,14 +54,14 @@ const ProductDetailPage = () => {
 	useEffect(() => {
 		const handleGetProduct = async () => {
 			try {
-				let respond = await axios.get(backendAPI + `/api/product/customer/detail/${product_id}`);
+				let respond = await axios.get(`${backendAPI}/api/product/customer/detail/${product_id}`);
 				setProductName(respond.data.product_name);
 				setProductDescription(respond.data.description);
 				setFeedbackQuantity(respond.data.feedback_quantity);
 				setRating(respond.data.rating);
 				setSold(respond.data.sold);
 
-				respond = await axios.get(backendAPI + `/api/product/customer/list-colour/${product_id}`);
+				respond = await axios.get(`${backendAPI}/api/product/customer/list-colour/${product_id}`);
 				setColorList(respond.data);
 				setSelectedColorIndex(0);
 				for (let index in respond.data) {
@@ -69,7 +69,7 @@ const ProductDetailPage = () => {
 						setSelectedColorIndex(parseInt(index));
 				}
 
-				respond = await axios.get(backendAPI + `/api/feedback/list/${product_id}`);
+				respond = await axios.get(`${backendAPI}/api/feedback/list/${product_id}`);
 				setFeedbackList(respond.data)
 			} catch (error) {
 				console.log(error);
@@ -85,7 +85,7 @@ const ProductDetailPage = () => {
 	useEffect(() => {
 		const handleGetListColour = async () => {
 			try {
-				let respond = await axios.get(backendAPI + '/api/product/customer/list-size'
+				let respond = await axios.get(`${backendAPI}/api/product/customer/list-size`
 					+ '/' + product_id
 					+ '/' + colorList[selectedColorIndex].colour_id
 				);
@@ -105,7 +105,7 @@ const ProductDetailPage = () => {
 	useEffect(() => {
 		const handleGetProductVariant = async () => {
 			try {
-				let respond = await axios.get(backendAPI + '/api/product-variant/customer/detail'
+				let respond = await axios.get(`${backendAPI}/api/product-variant/customer/detail`
 					+ '/' + product_id
 					+ '/' + colorList[selectedColorIndex].colour_id
 					+ '/' + sizeList[selectedSizeIndex].size_id

@@ -18,7 +18,7 @@ const OrderDetailPage = () => {
 		const getOrderItem = async () => {
 			try {
 				setIsLoading(true)
-				const result = await axios.get(homeAPI + `/order/admin/detail/${id_order}`)
+				const result = await axios.get(`${homeAPI}/order/admin/detail/${id_order}`)
 				setOrderDetail(result.data);
 				setIsLoading(false)
 			} catch (err) {

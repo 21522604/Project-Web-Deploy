@@ -49,7 +49,7 @@ const CreateCategoryModal = ({ isModalOpen, setIsModalOpen }) => {
                 parent_id: parentId
             }
             try {
-                await axios.post(homeAPI + '/category/create-level2', newCategoryLevel2)
+                await axios.post(`${homeAPI}/category/create-level2`, newCategoryLevel2)
                 swtoast.success({
                     text: 'Thêm thêm danh mục mới thành công!'
                 })

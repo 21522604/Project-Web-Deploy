@@ -16,7 +16,7 @@ const SizeBox = ({ selectedSizes, setSelectedSizes, sizeBoxValue, setSizeBoxValu
     useEffect(() => {
         const getSizeList = async () => {
             try {
-                const result = await axios.get(homeAPI + '/size/list');
+                const result = await axios.get(`${homeAPI}/size/list`);
                 setSizeList(result.data);
             } catch (err) {
                 console.log(err);

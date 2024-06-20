@@ -13,7 +13,7 @@ const detail = () => {
 
   useEffect(() => {
     const getOrderItem = async () => {
-      const result = await axios.get(homeAPI + `/order/admin/detail/${id_order}`)
+      const result = await axios.get(`${homeAPI}/order/admin/detail/${id_order}`)
       setOrderDetail(result.data);
     }
 

@@ -37,7 +37,7 @@ const ProductManagementPage = () => {
     useEffect(() => {
         const getListProductVariant = async () => {
             try {
-                const result = await axios.get(homeAPI + '/product/admin/list')
+                const result = await axios.get(`${homeAPI}/product/admin/list`)
                 setListProductVariant(result.data)
             } catch (err) {
                 console.log(err);
@@ -48,7 +48,7 @@ const ProductManagementPage = () => {
     }, [])
 
     const refreshProductVariantTable = async () => {
-        const result = await axios.get(homeAPI + '/product/admin/list')
+        const result = await axios.get(`${homeAPI}/product/admin/list`)
         setListProductVariant(result.data)
     }
 
