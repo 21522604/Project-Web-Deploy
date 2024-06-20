@@ -134,7 +134,7 @@ jobs:
         ENI_ID=$(echo $TASK_DETAILS | jq -r '.tasks[0].attachments[0].details[] | select(.name == "networkInterfaceId") | .value')
         ENI_DETAILS=$(aws ec2 describe-network-interfaces --network-interface-ids $ENI_ID)
         PUBLIC_IP=$(echo $ENI_DETAILS | jq -r '.NetworkInterfaces[0].Association.PublicIp')
-        echo "export const backendAPI = 'http://$PUBLIC_IP:3000'" >> frontend-customer/config.jsx
+        echo "export const backendAPI = 'http://$PUBLIC_IP:3000'" >> frontend-customer/config.jsx   
    
     
     #Frontend-customer deploy
