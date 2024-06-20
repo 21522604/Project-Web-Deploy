@@ -235,10 +235,14 @@ const CreateProductPage = () => {
                             {rowProductVariant.length ? rowProductVariant : <tr><td colSpan={5}><Empty /></td></tr>}
                         </tbody>
                     </table>
-                </div>
+                    </div>
                 <div className="btn-box text-left">
-                    <button className='text-light bg-dark' onClick={createProduct}>
-                        Thêm sản phẩm
+                    <button
+                        className='text-light bg-dark'
+                        onClick={createProduct}
+                        disabled={isLoading}  // Disable button during loading
+                    >
+                        {isLoading ? 'Đang thêm...' : 'Thêm sản phẩm'}
                     </button>
                 </div>
             </div>
