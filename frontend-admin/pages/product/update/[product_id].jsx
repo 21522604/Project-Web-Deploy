@@ -27,9 +27,9 @@ const fakeProductDetail = {
             size_name: 'S',
             quantity: 4,
             product_images: [
-                { path: 'http://localhost:8080/static/images/35bd44e7-3969-4a28-9c32-077b9f85162c.jpg' },
-                { path: 'http://localhost:8080/static/images/35bd44e7-3969-4a28-9c32-077b9f85162c.jpg' },
-                { path: 'http://localhost:8080/static/images/35bd44e7-3969-4a28-9c32-077b9f85162c.jpg' },
+                { path: `${homeAPI}/static/images/35bd44e7-3969-4a28-9c32-077b9f85162c.jpg` },
+                { path: `${homeAPI}/static/images/35bd44e7-3969-4a28-9c32-077b9f85162c.jpg` },
+                { path: `${homeAPI}/static/images/35bd44e7-3969-4a28-9c32-077b9f85162c.jpg` },
             ]
         },
         {
@@ -40,9 +40,9 @@ const fakeProductDetail = {
             size_name: 'M',
             quantity: 13,
             product_images: [
-                { path: 'http://localhost:8080/static/images/35bd44e7-3969-4a28-9c32-077b9f85162c.jpg' },
-                { path: 'http://localhost:8080/static/images/35bd44e7-3969-4a28-9c32-077b9f85162c.jpg' },
-                { path: 'http://localhost:8080/static/images/35bd44e7-3969-4a28-9c32-077b9f85162c.jpg' },
+                { path: `${homeAPI}/static/images/35bd44e7-3969-4a28-9c32-077b9f85162c.jpg` },
+                { path: `${homeAPI}/static/images/35bd44e7-3969-4a28-9c32-077b9f85162c.jpg` },
+                { path: `${homeAPI}/static/images/35bd44e7-3969-4a28-9c32-077b9f85162c.jpg` },
             ]
         },
     ]

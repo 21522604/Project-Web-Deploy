@@ -6,6 +6,26 @@ const Product_Image = require('../models/product_image');
 const Product_Price_History = require('../models/product_price_history');
 const uploadImage = require('../midlewares/uploadImage');
 
+const os = require('os');
+
+function getServerIpAddress() {
+    const networkInterfaces = os.networkInterfaces();
+    for (let interfaceName in networkInterfaces) {
+        const addresses = networkInterfaces[interfaceName];
+        for (let address of addresses) {
+            if (address.family === 'IPv4' && !address.internal) {
+                return address.address;
+            }
+        }
+    }
+    return 'localhost'; // Fallback to localhost if no external IP found
+}
+
+const port = 8080;
+const ipAddress = getServerIpAddress();
+const homeAPI = `http://${ipAddress}:${port}`;
+
+
 let create = async (req, res, next) => {
     uploadImage(req, res, async (err) => {
         if (err) {
@@ -33,7 +53,7 @@ let create = async (req, res, next) => {
             let newProductVariant = await Product_Variant.create(data);
             for (let file of files) {
                 let data = {
-                    path: 'http://localhost:8080/static/images/' + file.path.slice(-40, file.path.length),
+                    path: `${homeAPI}/static/images/` + file.path.slice(-40, file.path.length),
                     product_variant_id: newProductVariant.product_variant_id
                 }
                 let newProductImage = await Product_Image.create(data);
@@ -68,7 +88,7 @@ let update = async (req, res, next) => {
 
             for (let file of files) {
                 fileName = file.path.slice(-40, file.path.length)
-                let path = 'http://localhost:8080/static/images/' + fileName
+                let path = `${homeAPI}/static/images/` + fileName
                 await Product_Image.create({
                     path,
                     product_variant_id
